@@ -29,5 +29,9 @@ RSpec.describe Payment, type: :model do
     it '- a payment amount that is negative' do
        expect { Payment.create!(loan_id: loan.id, amount: -10.0) }.to raise_error(ActiveRecord::RecordInvalid, /Amount must be greater than 0/)
     end
+
+    it '- a payment amount that is not a number' do
+      expect { Payment.create!(loan_id: loan.id, amount: 'happy') }.to raise_error(ActiveRecord::RecordInvalid, /Amount is not a number/)
+    end
   end
 end

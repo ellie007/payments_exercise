@@ -19,7 +19,7 @@ RSpec.describe Payment, type: :model do
 
   describe 'does not create invalid payment records' do
     it '- a payment amount for a nonexistent loan' do
-      expect { Payment.create!(loan_id: 10000, amount: 10.0) }.to raise_error(ActiveRecord::RecordInvalid, /Loan is not a valid Loan ID/)
+      expect { Payment.create!(loan_id: 10000, amount: 10.0) }.to raise_error(ActiveRecord::RecordInvalid, /Loan ID is not a valid ID/)
     end
 
     it "- a payment amount above the loan's outstanding balance" do

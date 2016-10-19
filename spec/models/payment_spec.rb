@@ -26,7 +26,7 @@ RSpec.describe Payment, type: :model do
       expect { Payment.create!(loan_id: loan.id, amount: 1000.0) }.to raise_error(ActiveRecord::RecordInvalid, /Amount payment exceeds outstanding loan balance/)
     end
 
-    it ' a payment amount that is negative' do
+    it '- a payment amount that is negative' do
        expect { Payment.create!(loan_id: loan.id, amount: -10.0) }.to raise_error(ActiveRecord::RecordInvalid, /Amount must be greater than 0/)
     end
   end

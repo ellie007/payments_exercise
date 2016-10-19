@@ -33,5 +33,13 @@ RSpec.describe Payment, type: :model do
     it '- a payment amount that is not a number' do
       expect { Payment.create!(loan_id: loan.id, amount: 'happy') }.to raise_error(ActiveRecord::RecordInvalid, /Amount is not a number/)
     end
+
+    it '- a payment that does not include amount parameter' do
+      expect { Payment.create!(loan_id: loan.id) }.to raise_error(ActiveRecord::RecordInvalid, /Amount can't be blank/)
+    end
+
+    it '- a payment that does not include loan_id parameter' do
+      expect { Payment.create!(amount: 10.0) }.to raise_error(ActiveRecord::RecordInvalid, /Loan ID is not a valid ID/)
+    end
   end
 end

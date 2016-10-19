@@ -9,7 +9,8 @@ class Payment < ActiveRecord::Base
   validate :amount_does_not_exceed_outstanding_balance
 
   def amount_does_not_exceed_outstanding_balance
-    if self.loan && (self.loan.outstanding_balance < amount)
+    return unless errors.blank?
+    if amount > self.loan.outstanding_balance
       errors.add(:amount, "payment exceeds outstanding loan balance.")
     end
   end
